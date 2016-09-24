@@ -34,7 +34,7 @@ Presentation prepared with Pascal Lamblin and Simon Lefrancois
 \begin{frame}[plain]
  \titlepage
  \vspace{-5em}
- \includegraphics[width=1.4in]{pics/MILA.png}
+ \includegraphics[width=1.1in]{pics/MILA.png}
  \hfill
  \includegraphics[width=.8in]{pics/UdeM_NoirBleu_logo_Marie_crop}
 \end{frame}
@@ -182,6 +182,8 @@ Montreal Institute for Machine Learning\newline
 \item Google
 \item Facebook
 \item NVIDIA
+\item Huawei
+\item Intel
 \item D-Wave
 \item ApSTAT
 \item Qualcomm
@@ -240,7 +242,7 @@ Montreal Institute for Machine Learning\newline
     \item Extensive unit-testing and self-verification
     \item Extensible (You can create new operations as needed)
     \item Works on \begin{bf}Linux, OS X and Windows\end{bf}
-    \item \begin{bf}Multi-GPU\end{bf}
+    \item \begin{bf}Multi-GPU\end{bf} (via platoon)
     \item New GPU back-end:
       \begin{itemize}
       \item \begin{bf}Float16\end{bf} new back-end (need cuda 7.5)
@@ -389,8 +391,8 @@ print f([0, 1, 2])
         }
 \begin{lstlisting}
 >>> x = T.scalar('x')
->>> y = 2. * x
->>> g = T.grad(y, x)
+>>> cost = 2. * x
+>>> g = T.grad(cost, x)
 \end{lstlisting}
 \lstset{language=Python,
         commentstyle=\itshape\color{blue},
@@ -661,7 +663,7 @@ conv_out = conv.conv2d(input=x, filters=W)
 # using maxpooling
 pooled_out = pool.pool_2d(
     input=conv_out,
-    ds=(2, 2),  // poolsize
+    ds=(2, 2),  # poolsize
     ignore_border=True)
 
 output = T.tanh(pooled_out +
@@ -706,28 +708,11 @@ Highlights:
 \item Faster compilation and execution
 \item Integration of CuDNN for better GPU performance
 \item Many Scan improvements (execution speed up, ...)
+\item Interactive visualization of graphs with d3viz
 \item optimizer=fast\_compile moves computation to the GPU.
 \item Multi-GPU for data parallism via Platoon \url{https://github.com/mila-udem/platoon}
-\item New GPU back-end:  
-  \begin{itemize}
-  \item Float16 new back-end (need cuda 7.5)
-  \item Multi dtypes
-  \item Multi-GPU support in the same process
-  \end{itemize}
-\end{itemize}
-
-\end{frame}
-
-
-\begin{frame}{Theano 0.8}
-
-Highlights:
-\begin{itemize}
-\item Better convolution on CPU and GPU. (CorrMM, cudnn, 3d conv, more parameters)
-\item More pooling parameters supported
-\item Interactive visualization of graphs with d3viz
 \item cnmem (better memory management on GPU)
-\item Bilinear interpolation of images
+\item New GPU back-end
 \end{itemize}
 
 A total of 141 people contributed to this release.
@@ -770,7 +755,7 @@ Highlights:
     \item Scan very long sequence, (ex: Audio recognition and generation)
     \item Recompute cheap operation of the forward during the gradient
     \end{itemize}
-  \item More Multi-GPU data parallelism algo.
+  \item More Multi-GPU data parallelism algo
   \end{itemize}
 \end{frame}
 
@@ -795,7 +780,7 @@ Acknowledgments
 \end{center}
 \normalsize
 \begin{itemize}
-\item All people working or having worked at MILA institute/LISA lab.
+\item All people working or having worked at MILA institute (previously LISA lab).
 \item All Theano users/contributors.
 \item Compute Canada, RQCHP, NSERC, NVIDIA, and Canada Research Chairs for providing funds, access to computing resources, hardware or GPU libraries.
 \end{itemize}
